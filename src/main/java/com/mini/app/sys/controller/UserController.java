@@ -85,6 +85,12 @@ public class UserController {
         return ApiResponse.createApiResponse(path, Result.SUCCESS);
     }
 
+    /**
+     * @Description 头像回显
+     * @Date 18:02 2020/10/27
+     * @Param [imgName]
+     * @return byte[]
+     **/
     @GetMapping(value = "/imageView/{imgName}", produces = MediaType.IMAGE_JPEG_VALUE)
     @ResponseBody
     public byte[] imgView(@PathVariable("imgName") String imgName) {
