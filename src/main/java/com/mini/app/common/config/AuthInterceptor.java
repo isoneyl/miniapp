@@ -45,6 +45,9 @@ public class AuthInterceptor extends HandlerInterceptorAdapter {
                 token = request.getParameter("token");
             } else {
                 Map<String, Object> map = JSON.parseObject(data);
+                if (map.get("token") == null && map.get("userId") == null) {
+                    throw new ApiException(Result.TOKEN_ERROR);
+                }
                 token = map.get("token").toString();
                 userIdStr = map.get("userId").toString();
             }
