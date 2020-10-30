@@ -25,6 +25,8 @@ public class InterceptorConfig implements WebMvcConfigurer {
         interceptorRegistration.excludePathPatterns("/sys/login");
         // 查看头像接口不拦截
         interceptorRegistration.excludePathPatterns("/user/imageView/**");
+        // 上传图片不拦截
+        interceptorRegistration.excludePathPatterns("/user/uploadImg");
         // 放行/error，不然会被拦截
         interceptorRegistration.excludePathPatterns("/error");
         // 拦截全部路径
