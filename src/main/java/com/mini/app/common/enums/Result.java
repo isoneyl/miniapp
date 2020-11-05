@@ -21,6 +21,7 @@ public enum Result {
 	SAVE_ERROR(-502, "保存失败"),
 	UPLOAD_IMG_ERROR(-503, "上传图片失败"),
 	IMG_PATH_ERROR(-503, "图片不存在"),
+	PWD_ERROR(-504, "密码错误"),
 	VX_ERRO(1000, "请求微信接口失败,请稍后重试"),
 	;
 

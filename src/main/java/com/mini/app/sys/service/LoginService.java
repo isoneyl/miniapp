@@ -1,5 +1,6 @@
 package com.mini.app.sys.service;
 
+import com.mini.app.common.entity.manage.ManageUser;
 import com.mini.app.common.entity.user.User;
 import com.mini.app.common.entity.vx.VXCode;
 
@@ -21,4 +22,12 @@ public interface LoginService {
      **/
     Map<String, Object> loninSys(VXCode data);
 
+    /**
+     * @Author liyunlong
+     * @Description //TODO
+     * @Date 12:01 2020/11/5
+     * @Param [data]
+     * @return java.lang.Object
+     **/
+    Map<String, Object> loninManageSys(ManageUser data);
 }

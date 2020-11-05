@@ -1,12 +1,14 @@
 package com.mini.app.sys.service.impl;
 
 import com.alibaba.fastjson.JSONObject;
+import com.mini.app.common.entity.manage.ManageUser;
 import com.mini.app.common.entity.user.User;
 import com.mini.app.common.entity.vx.VXCode;
 import com.mini.app.common.enums.Result;
 import com.mini.app.common.exception.ApiException;
 import com.mini.app.common.utils.JWTUtils;
 import com.mini.app.sys.controller.LoginController;
+import com.mini.app.sys.dao.ManageUserDao;
 import com.mini.app.sys.dao.UserDao;
 import com.mini.app.sys.service.LoginService;
 import org.slf4j.Logger;
@@ -14,6 +16,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
+import tk.mybatis.mapper.entity.Example;
 
 import java.util.Date;
 import java.util.HashMap;
@@ -33,6 +36,9 @@ public class LoginServiceImpl implements LoginService {
 
     @Autowired
     private UserDao userDao;
+
+    @Autowired
+    private ManageUserDao manageUserDao;
 
     /**
      * @param data
@@ -85,6 +91,35 @@ public class LoginServiceImpl implements LoginService {
         map.put("userId", loginUser.getUserId());
         map.put("token", token);
         map.put("userName", loginUser.getUserName());
+        return map;
+    }
+
+    /**
+     * @param data
+     * @return java.lang.Object
+     * @Author liyunlong
+     * @Description //TODO
+     * @Date 12:01 2020/11/5
+     * @Param [data]
+     */
+    @Override
+    public Map<String, Object> loninManageSys(ManageUser data) {
+        Map<String, Object> map = new HashMap<>();
+        String manageAccound = data.getManageAccound();
+        String managePwd = data.getManagePwd();
+
+        Example example = new Example(ManageUser.class);
+        example.createCriteria()
+                .andEqualTo("manageAccound", manageAccound)
+                .andEqualTo("managePwd", managePwd);
+
+        ManageUser manageUser = manageUserDao.selectOneByExample(example);
+        if (manageUser == null) {
+            throw new ApiException(Result.PWD_ERROR);
+        }
+        String token = JWTUtils.createToken(manageAccound);
+        map.put("manageId", manageUser.getManageId());
+        map.put("token", token);
         return map;
     }
 }

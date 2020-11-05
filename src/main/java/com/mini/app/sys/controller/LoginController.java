@@ -4,6 +4,7 @@ import com.mini.app.common.annotation.ValidateArgument;
 import com.mini.app.common.annotation.ValidateArguments;
 import com.mini.app.common.entity.ApiRequest;
 import com.mini.app.common.entity.ApiResponse;
+import com.mini.app.common.entity.manage.ManageUser;
 import com.mini.app.common.entity.vx.VXCode;
 import com.mini.app.common.enums.Result;
 import com.mini.app.sys.service.LoginService;
@@ -45,5 +46,18 @@ public class LoginController {
         VXCode data = apiRequest.getData();
 
         return ApiResponse.createApiResponse(loginService.loninSys(data), Result.SUCCESS);
+    }
+
+    @PostMapping(value = "/loginManage", produces = "application/json; charset=UTF-8")
+    @ResponseBody
+    @ValidateArguments(
+            validateArguments ={
+                    @ValidateArgument(fieldName = "manageAccound"),
+                    @ValidateArgument(fieldName = "managePwd")
+            })
+    public ApiResponse<Map<String, Object>> loninManageSys(@RequestBody ApiRequest<ManageUser> apiRequest) {
+        ManageUser data = apiRequest.getData();
+
+        return ApiResponse.createApiResponse(loginService.loninManageSys(data), Result.SUCCESS);
     }
 }

@@ -33,28 +33,39 @@ public class AuthInterceptor extends HandlerInterceptorAdapter {
      **/
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
 
+        if (true) return true;
         ServletRequest requestWrapper = null;
         if (request instanceof HttpServletRequest) {
             requestWrapper = new RequestWrapper(request);
             String data = RequestWrapper.ReadAsChars(requestWrapper);
 
             String userIdStr = "";
+            String manageId = "";
             String token = "";
             if (StringUtils.isEmpty(data)) {
                 userIdStr = request.getParameter("userId");
                 token = request.getParameter("token");
+                manageId = request.getParameter("manageId");
             } else {
                 Map<String, Object> map = JSON.parseObject(data);
-                if (map.get("token") == null && map.get("userId") == null) {
+                if (map.get("token") == null) {
                     throw new ApiException(Result.TOKEN_ERROR);
                 }
                 token = map.get("token").toString();
-                userIdStr = map.get("userId").toString();
+            }
+            // 判断是不是后台的用户
+            String appUID = JWTUtils.getAppUID(token);
+            if (StringUtils.isEmpty(manageId)) {
+                if (!manageId.equals(appUID))
+                    throw new ApiException(Result.TOKEN_ERROR);
+
+                return true;
             }
 
             // 验证Token是否有效
-            String appUID = JWTUtils.getAppUID(token);
-            if (!userIdStr.equals(appUID)) throw new ApiException(Result.TOKEN_ERROR);
+            if (!userIdStr.equals(appUID))
+                throw new ApiException(Result.TOKEN_ERROR);
+
             return true;
         }
         return false;
