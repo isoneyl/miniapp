@@ -19,7 +19,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
  * @date 2020/10/27
  */
 @Controller
-@RequestMapping("/apply")
+@RequestMapping("home/apply")
 public class ApplyController {
     @Autowired
     private ApplyService applyService;

@@ -117,7 +117,7 @@ public class LoginServiceImpl implements LoginService {
         if (manageUser == null) {
             throw new ApiException(Result.PWD_ERROR);
         }
-        String token = JWTUtils.createToken(manageAccound);
+        String token = JWTUtils.createToken(manageUser);
         map.put("manageId", manageUser.getManageId());
         map.put("token", token);
         return map;

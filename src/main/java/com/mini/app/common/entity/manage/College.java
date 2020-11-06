@@ -8,39 +8,30 @@ import lombok.experimental.Accessors;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
-import java.io.Serializable;
 import java.util.Date;
 
 /**
  * @author liyunlng
- * @ClassName: ManageUser
+ * @ClassName: College
  * @Description:
- * @date 2020/11/4
+ * @date 2020/11/5
  */
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
 @Accessors(chain = true)
-@Table(name = "tb_manage_user")
-public class ManageUser implements Serializable {
-
-    private static final long serialVersionUID = 2661235376943498822L;
+@Table(name = "tb_manage_college")
+public class College {
 
     @Id
     @GeneratedValue(generator = "JDBC")
+    private Integer collegeId;
+
+    private String collegeName;
+
     private Integer manageId;
 
-    private String manageAccound;
-
     private String manageName;
-
-    private String phone;
-
-    private String managePwd;
-
-    private String email;
-
-    private Integer gender;
 
     private Date createTime;
 

@@ -29,6 +29,11 @@ public class ApiRequest<T> implements Serializable {
     private Integer userId;
 
     /**
+     * 后台ID
+     **/
+    private Integer manageId;
+
+    /**
      * 当前页数
      */
     private Integer pageNo = 1;

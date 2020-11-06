@@ -7,6 +7,8 @@ import lombok.NoArgsConstructor;
 import lombok.experimental.Accessors;
 import org.springframework.format.annotation.DateTimeFormat;
 
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
 import javax.persistence.Table;
 import java.io.Serializable;
 import java.util.Date;
@@ -26,6 +28,8 @@ public class Role implements Serializable {
 
     private static final long serialVersionUID = 213213123123123123L;
     // id
+    @Id
+    @GeneratedValue(generator = "JDBC")
     private Integer id;
 
     // roleName

@@ -1,5 +1,7 @@
 package com.mini.app.home.service;
 
+import com.mini.app.common.entity.home.Bulletin;
+
 /**
  * @author liyunlng
  * @ClassName: BulletinService
@@ -7,4 +9,9 @@ package com.mini.app.home.service;
  * @date 2020/10/27
  */
 public interface BulletinService {
+    int addBulletin(Bulletin data);
+
+    int updateBulletin(Bulletin data);
+
+    int delBulletin(Integer data);
 }

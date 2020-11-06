@@ -1,5 +1,7 @@
 package com.mini.app.home.service;
 
+import com.mini.app.common.entity.home.News;
+
 /**
  * @author liyunlng
  * @ClassName: NewsService
@@ -7,4 +9,9 @@ package com.mini.app.home.service;
  * @date 2020/10/27
  */
 public interface NewsService {
+    int addNews(News data);
+
+    int updateNews(News data);
+
+    int delNews(Integer data);
 }
