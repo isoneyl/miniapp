@@ -1,11 +1,14 @@
 package com.mini.app.manage.service.impl;
 
+import com.github.pagehelper.PageHelper;
 import com.mini.app.common.entity.manage.ManageUser;
 import com.mini.app.manage.service.ManageUserService;
 import com.mini.app.sys.dao.ManageUserDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.List;
 
 /**
  * @author liyunlng
@@ -36,5 +39,12 @@ public class ManageUserServiceImpl implements ManageUserService {
     @Transactional
     public int delCollege(Integer data) {
         return manageUserDao.deleteByPrimaryKey(data);
+    }
+
+    @Override
+    public List<ManageUser> queryUsers(Integer pageNo, Integer pageSize, ManageUser data) {
+        PageHelper.startPage(pageNo, pageSize);
+        List<ManageUser> manageUsers = manageUserDao.select(data);
+        return manageUsers;
     }
 }

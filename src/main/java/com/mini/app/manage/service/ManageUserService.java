@@ -2,6 +2,8 @@ package com.mini.app.manage.service;
 
 import com.mini.app.common.entity.manage.ManageUser;
 
+import java.util.List;
+
 /**
  * @author liyunlng
  * @ClassName: ManageUserService
@@ -14,4 +16,6 @@ public interface ManageUserService {
     int updateManageUser(ManageUser data);
 
     int delCollege(Integer data);
+
+    List<ManageUser> queryUsers(Integer pageNo, Integer pageSize, ManageUser data);
 }

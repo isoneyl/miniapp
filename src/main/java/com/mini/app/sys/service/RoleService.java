@@ -50,5 +50,4 @@ public interface RoleService {
     int addUserByRole(UserRole userRole);
 
     boolean queryRoleByUserId(Integer id);
-
 }

@@ -17,6 +17,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
 import java.io.FileInputStream;
+import java.util.List;
 
 
 /**
@@ -70,6 +71,16 @@ public class UserController {
         Integer userId = apiRequest.getData().getUserId();
         User user = userService.queryUserInfoById(userId);
         return ApiResponse.createApiResponse(user, Result.SUCCESS);
+    }
+
+    @PostMapping(value = "/queryUsers", produces = "application/json; charset=UTF-8")
+    @ResponseBody
+    public ApiResponse<List<User>> queryUsers(@RequestBody ApiRequest<User> apiRequest) {
+        Integer pageNo = apiRequest.getPageNo();
+        Integer pageSize = apiRequest.getPageSize();
+        User data = apiRequest.getData();
+        List<User> users = userService.queryUsers(pageNo, pageSize, data);
+        return ApiResponse.createApiResponse(users, Result.SUCCESS);
     }
 
     /**

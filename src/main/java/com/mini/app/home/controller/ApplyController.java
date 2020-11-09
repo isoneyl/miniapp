@@ -27,7 +27,10 @@ public class ApplyController {
     @RequestMapping(value = "/saveApply", produces = "application/json; charset=UTF-8")
     @ResponseBody
     public ApiResponse<Apply> saveApply(@RequestBody ApiRequest<Apply> apiRequest) {
-        int rows = applyService.addApply(apiRequest.getData());
+        Integer userId = apiRequest.getUserId();
+        Apply apply = apiRequest.getData().setUserId(userId);
+
+        int rows = applyService.addApply(apply);
         if (rows == 0)
             throw new ApiException(Result.SAVE_ERROR);
 

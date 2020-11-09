@@ -2,7 +2,9 @@ package com.mini.app.sys.service.impl;
 
 import com.alibaba.fastjson.JSONObject;
 import com.mini.app.common.entity.manage.ManageUser;
+import com.mini.app.common.entity.user.Role;
 import com.mini.app.common.entity.user.User;
+import com.mini.app.common.entity.user.UserRole;
 import com.mini.app.common.entity.vx.VXCode;
 import com.mini.app.common.enums.Result;
 import com.mini.app.common.exception.ApiException;
@@ -10,6 +12,7 @@ import com.mini.app.common.utils.JWTUtils;
 import com.mini.app.sys.controller.LoginController;
 import com.mini.app.sys.dao.ManageUserDao;
 import com.mini.app.sys.dao.UserDao;
+import com.mini.app.sys.dao.UserRoleDao;
 import com.mini.app.sys.service.LoginService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -39,6 +42,9 @@ public class LoginServiceImpl implements LoginService {
 
     @Autowired
     private ManageUserDao manageUserDao;
+
+    @Autowired
+    private UserRoleDao userRoleDao;
 
     /**
      * @param data
@@ -117,9 +123,21 @@ public class LoginServiceImpl implements LoginService {
         if (manageUser == null) {
             throw new ApiException(Result.PWD_ERROR);
         }
+        // 查询用户角色权限
+        Example roleExample = new Example(UserRole.class);
+        roleExample.createCriteria()
+                .andEqualTo("user", manageAccound);
+        UserRole userRole
+                = userRoleDao.selectOne(new UserRole().setUserId(manageUser.getManageId()));
+        Integer roleId = null;
+        if (userRole != null) {
+            roleId = userRole.getRoleId();
+        }
         String token = JWTUtils.createToken(manageUser);
         map.put("manageId", manageUser.getManageId());
         map.put("token", token);
+        map.put("roleId", roleId);
+
         return map;
     }
 }

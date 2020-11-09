@@ -5,6 +5,7 @@ import com.mini.app.common.annotation.ValidateArguments;
 import com.mini.app.common.entity.ApiRequest;
 import com.mini.app.common.entity.ApiResponse;
 import com.mini.app.common.entity.manage.College;
+import com.mini.app.common.entity.manage.ManageUser;
 import com.mini.app.common.enums.Result;
 import com.mini.app.manage.service.CollegeService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,8 +13,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.util.Date;
+import java.util.List;
 
 /**
  * @author liyunlng
@@ -58,6 +61,16 @@ public class CollegeController {
         Integer data = college.getData();
         collegeService.delCollege(data);
         return ApiResponse.createApiResponse(null, Result.SUCCESS);
+    }
+
+    @PostMapping(value = "/queryColleges", produces = "application/json; charset=UTF-8")
+    @ResponseBody
+    public ApiResponse<List<College>> queryColleges(@RequestBody ApiRequest<College> apiRequest) {
+        Integer pageNo = apiRequest.getPageNo();
+        Integer pageSize = apiRequest.getPageSize();
+        College data = apiRequest.getData();
+        List<College> users = collegeService.queryUsers(pageNo, pageSize, data);
+        return ApiResponse.createApiResponse(users, Result.SUCCESS);
     }
 
 }

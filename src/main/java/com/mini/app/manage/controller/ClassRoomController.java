@@ -14,8 +14,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.util.Date;
+import java.util.List;
 
 /**
  * @author liyunlng
@@ -64,4 +66,13 @@ public class ClassRoomController {
         return ApiResponse.createApiResponse(null, Result.SUCCESS);
     }
 
+    @PostMapping(value = "/queryClassRooms", produces = "application/json; charset=UTF-8")
+    @ResponseBody
+    public ApiResponse<List<ClassRoom>> queryColleges(@RequestBody ApiRequest<ClassRoom> apiRequest) {
+        Integer pageNo = apiRequest.getPageNo();
+        Integer pageSize = apiRequest.getPageSize();
+        ClassRoom data = apiRequest.getData();
+        List<ClassRoom> users = classRoomService.queryUsers(pageNo, pageSize, data);
+        return ApiResponse.createApiResponse(users, Result.SUCCESS);
+    }
 }

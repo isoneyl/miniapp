@@ -2,6 +2,8 @@ package com.mini.app.manage.service;
 
 import com.mini.app.common.entity.manage.College;
 
+import java.util.List;
+
 /**
  * @author liyunlng
  * @ClassName: ConllegeService
@@ -15,4 +17,6 @@ public interface CollegeService {
     int addCollegeUser(College data);
 
     int delCollege(Integer data);
+
+    List<College> queryUsers(Integer pageNo, Integer pageSize, College data);
 }

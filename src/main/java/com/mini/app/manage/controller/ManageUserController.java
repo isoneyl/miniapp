@@ -6,6 +6,7 @@ import com.mini.app.common.entity.ApiRequest;
 import com.mini.app.common.entity.ApiResponse;
 import com.mini.app.common.entity.manage.College;
 import com.mini.app.common.entity.manage.ManageUser;
+import com.mini.app.common.entity.user.User;
 import com.mini.app.common.enums.Result;
 import com.mini.app.manage.service.ManageUserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,8 +14,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.util.Date;
+import java.util.List;
 
 /**
  * @author liyunlng
@@ -23,13 +26,23 @@ import java.util.Date;
  * @date 2020/11/6
  */
 @Controller
-@RequestMapping(value = "/manage/class")
+@RequestMapping(value = "/manage/user")
 public class ManageUserController {
 
     @Autowired
     private ManageUserService manageUserService;
 
-    @PostMapping(value = "addManageUser", produces = "application/json; charset=UTF-8")
+    @PostMapping(value = "/queryManageUsers", produces = "application/json; charset=UTF-8")
+    @ResponseBody
+    public ApiResponse<List<ManageUser>> queryUsers(@RequestBody ApiRequest<ManageUser> apiRequest) {
+        Integer pageNo = apiRequest.getPageNo();
+        Integer pageSize = apiRequest.getPageSize();
+        ManageUser data = apiRequest.getData();
+        List<ManageUser> users = manageUserService.queryUsers(pageNo, pageSize, data);
+        return ApiResponse.createApiResponse(users, Result.SUCCESS);
+    }
+
+    @PostMapping(value = "/addManageUser", produces = "application/json; charset=UTF-8")
     @ValidateArguments(validateArguments = {
             @ValidateArgument(fieldName = "manageAccound"),
             @ValidateArgument(fieldName = "manageName"),

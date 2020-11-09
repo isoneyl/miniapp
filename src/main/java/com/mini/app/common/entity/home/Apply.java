@@ -31,6 +31,8 @@ public class Apply implements Serializable {
     @GeneratedValue(generator = "JDBC")
     private Integer id;
 
+    private Integer userId;
+
     // 姓名
     private String userName;
 

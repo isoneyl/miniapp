@@ -1,5 +1,6 @@
 package com.mini.app.sys.service.impl;
 
+import com.github.pagehelper.PageHelper;
 import com.mini.app.common.entity.user.User;
 import com.mini.app.common.enums.Result;
 import com.mini.app.common.exception.ApiException;
@@ -14,6 +15,7 @@ import org.springframework.web.multipart.MultipartFile;
 import javax.imageio.ImageIO;
 import java.io.File;
 import java.util.Date;
+import java.util.List;
 import java.util.UUID;
 
 /**
@@ -91,5 +93,12 @@ public class UserServiceImpl implements UserService {
             e.printStackTrace();
         }
         return "";
+    }
+
+    @Override
+    public List<User> queryUsers(Integer pageNo, Integer pageSize, User data) {
+        PageHelper.startPage(pageNo, pageSize);
+        List<User> select = userDao.select(data);
+        return select;
     }
 }

@@ -3,6 +3,8 @@ package com.mini.app.sys.service;
 import com.mini.app.common.entity.user.User;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.util.List;
+
 /**
  * @author liyunlng
  * @ClassName: UserService
@@ -36,4 +38,5 @@ public interface UserService {
     String uploadImg(MultipartFile fileImg);
 
 
+    List<User> queryUsers(Integer pageNo, Integer pageSize, User data);
 }

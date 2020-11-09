@@ -34,6 +34,11 @@ public class ApiRequest<T> implements Serializable {
     private Integer manageId;
 
     /**
+     * 后台ID
+     **/
+    private Integer roleId;
+
+    /**
      * 当前页数
      */
     private Integer pageNo = 1;

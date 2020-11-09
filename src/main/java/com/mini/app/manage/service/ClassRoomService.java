@@ -2,6 +2,8 @@ package com.mini.app.manage.service;
 
 import com.mini.app.common.entity.manage.ClassRoom;
 
+import java.util.List;
+
 /**
  * @author liyunlng
  * @ClassName: ClassRoomService
@@ -14,4 +16,6 @@ public interface ClassRoomService {
     int updateClassRoom(ClassRoom data);
 
     int delClassRoom(Integer data);
+
+    List<ClassRoom> queryUsers(Integer pageNo, Integer pageSize, ClassRoom data);
 }
