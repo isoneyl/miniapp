@@ -97,6 +97,7 @@ public class LoginServiceImpl implements LoginService {
         map.put("userId", loginUser.getUserId());
         map.put("token", token);
         map.put("userName", loginUser.getUserName());
+        map.put("roleId", null);
         return map;
     }
 
@@ -136,6 +137,7 @@ public class LoginServiceImpl implements LoginService {
         String token = JWTUtils.createToken(manageUser);
         map.put("manageId", manageUser.getManageId());
         map.put("token", token);
+        map.put("userName", manageUser.getManageName());
         map.put("roleId", roleId);
 
         return map;

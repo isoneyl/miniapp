@@ -3,6 +3,7 @@ package com.mini.app.sys.controller;
 import com.mini.app.common.entity.ApiRequest;
 import com.mini.app.common.entity.ApiResponse;
 import com.mini.app.common.entity.user.Role;
+import com.mini.app.common.entity.user.UserRole;
 import com.mini.app.common.enums.Result;
 import com.mini.app.sys.service.RoleService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,6 +33,14 @@ public class RoleController {
     public ApiResponse<List<Role>> queryRoles(@RequestBody ApiRequest<Role> apiRequest) {
         List<Role> roles = roleService.queryRole(apiRequest);
         return ApiResponse.createApiResponse(roles, Result.SUCCESS);
+    }
+
+    @PostMapping(value = "/setUsetRole", produces = "application/json; charset=UTF-8")
+    @ResponseBody
+    public ApiResponse<Boolean> setRole(@RequestBody ApiRequest<UserRole> apiRequest) {
+        UserRole data = apiRequest.getData();
+        int i = roleService.addUserByRole(data);
+        return ApiResponse.createApiResponse(i != 0, Result.SUCCESS);
     }
 
 }
