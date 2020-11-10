@@ -50,6 +50,7 @@ public class ManageUserController {
             @ValidateArgument(fieldName = "managePwd"),
             @ValidateArgument(fieldName = "gender")
     })
+    @ResponseBody
     public ApiResponse<Boolean> addManageUser(@RequestBody ApiRequest<ManageUser> college) {
 
         ManageUser data = college.getData();
@@ -62,6 +63,7 @@ public class ManageUserController {
     @ValidateArguments(validateArguments = {
             @ValidateArgument(fieldName = "manageId")
     })
+    @ResponseBody
     public ApiResponse<Boolean> updateManageUser(@RequestBody ApiRequest<ManageUser> college) {
 
         ManageUser data = college.getData();
@@ -70,6 +72,7 @@ public class ManageUserController {
     }
 
     @PostMapping(value = "/delManageUser", produces = "application/json; charset=UTF-8")
+    @ResponseBody
     public ApiResponse<Boolean> delManageUser(@RequestBody ApiRequest<Integer> college) {
 
         Integer data = college.getData();

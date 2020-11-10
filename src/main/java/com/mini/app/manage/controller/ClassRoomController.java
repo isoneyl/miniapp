@@ -38,6 +38,7 @@ public class ClassRoomController {
             @ValidateArgument(fieldName = "collegeId"),
             @ValidateArgument(fieldName = "collegeName")
     })
+    @ResponseBody
     public ApiResponse<Boolean> addClassRoom(@RequestBody ApiRequest<ClassRoom> apiRequest) {
 
         ClassRoom data = apiRequest.getData();
@@ -51,6 +52,7 @@ public class ClassRoomController {
             @ValidateArgument(fieldName = "manageId"),
             @ValidateArgument(fieldName = "manageName")
     })
+    @ResponseBody
     public ApiResponse<Boolean> updateClassRoom(@RequestBody ApiRequest<ClassRoom> apiRequest) {
 
         ClassRoom data = apiRequest.getData();
@@ -59,6 +61,7 @@ public class ClassRoomController {
     }
 
     @PostMapping(value = "/delClassRoom", produces = "application/json; charset=UTF-8")
+    @ResponseBody
     public ApiResponse<Boolean> delClassRoom(@RequestBody ApiRequest<Integer> apiRequest) {
 
         Integer data = apiRequest.getData();

@@ -13,6 +13,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.util.Date;
 
@@ -36,6 +37,7 @@ public class ASKController {
             @ValidateArgument(fieldName = "manageName"),
             @ValidateArgument(fieldName = "content")
     })
+    @ResponseBody
     public ApiResponse<Boolean> addAsk(@RequestBody ApiRequest<Ask> apiRequest) {
 
         Ask data = apiRequest.getData();
@@ -48,6 +50,7 @@ public class ASKController {
     @ValidateArguments(validateArguments = {
             @ValidateArgument(fieldName = "id")
     })
+    @ResponseBody
     public ApiResponse<Boolean> updateAsk(@RequestBody ApiRequest<Ask> apiRequest) {
 
         Ask data = apiRequest.getData();
@@ -56,6 +59,7 @@ public class ASKController {
     }
 
     @PostMapping(value = "/delAsk", produces = "application/json; charset=UTF-8")
+    @ResponseBody
     public ApiResponse<Boolean> delAsk(@RequestBody ApiRequest<Integer> apiRequest) {
 
         Integer data = apiRequest.getData();

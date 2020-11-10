@@ -125,11 +125,12 @@ public class LoginServiceImpl implements LoginService {
             throw new ApiException(Result.PWD_ERROR);
         }
         // 查询用户角色权限
+        Integer manageId = manageUser.getManageId();
         Example roleExample = new Example(UserRole.class);
         roleExample.createCriteria()
-                .andEqualTo("user", manageAccound);
+                .andEqualTo("userId", manageId);
         UserRole userRole
-                = userRoleDao.selectOne(new UserRole().setUserId(manageUser.getManageId()));
+                = userRoleDao.selectOne(new UserRole().setUserId(manageId));
         Integer roleId = null;
         if (userRole != null) {
             roleId = userRole.getRoleId();

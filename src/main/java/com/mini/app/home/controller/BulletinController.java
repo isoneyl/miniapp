@@ -13,6 +13,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.util.Date;
 
@@ -37,6 +38,7 @@ public class BulletinController {
             @ValidateArgument(fieldName = "manageName"),
             @ValidateArgument(fieldName = "content")
     })
+    @ResponseBody
     public ApiResponse<Boolean> addBulletin(@RequestBody ApiRequest<Bulletin> apiRequest) {
 
         Bulletin data = apiRequest.getData();
@@ -49,6 +51,7 @@ public class BulletinController {
     @ValidateArguments(validateArguments = {
             @ValidateArgument(fieldName = "id")
     })
+    @ResponseBody
     public ApiResponse<Boolean> updateBulletin(@RequestBody ApiRequest<Bulletin> apiRequest) {
 
         Bulletin data = apiRequest.getData();
@@ -57,6 +60,7 @@ public class BulletinController {
     }
 
     @PostMapping(value = "/delBulletin", produces = "application/json; charset=UTF-8")
+    @ResponseBody
     public ApiResponse<Boolean> delBulletin(@RequestBody ApiRequest<Integer> apiRequest) {
 
         Integer data = apiRequest.getData();

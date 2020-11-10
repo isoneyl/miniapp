@@ -10,10 +10,7 @@ import com.mini.app.common.enums.Result;
 import com.mini.app.manage.service.CollegeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.Date;
 import java.util.List;
@@ -35,6 +32,7 @@ public class CollegeController {
     @ValidateArguments(validateArguments = {
             @ValidateArgument(fieldName = "collegeName")
     })
+    @ResponseBody
     public ApiResponse<Boolean> addCollege(@RequestBody ApiRequest<College> college) {
 
         College data = college.getData();
@@ -48,6 +46,7 @@ public class CollegeController {
             @ValidateArgument(fieldName = "manageId"),
             @ValidateArgument(fieldName = "manageName")
     })
+    @ResponseBody
     public ApiResponse<Boolean> addCollegeUser(@RequestBody ApiRequest<College> college) {
 
         College data = college.getData();
@@ -56,6 +55,7 @@ public class CollegeController {
     }
 
     @PostMapping(value = "/delCollegeUser", produces = "application/json; charset=UTF-8")
+    @ResponseBody
     public ApiResponse<Boolean> delCollegeUser(@RequestBody ApiRequest<Integer> college) {
 
         Integer data = college.getData();
