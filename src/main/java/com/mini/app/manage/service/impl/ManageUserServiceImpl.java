@@ -44,7 +44,7 @@ public class ManageUserServiceImpl implements ManageUserService {
     @Override
     public List<ManageUser> queryUsers(Integer pageNo, Integer pageSize, ManageUser data) {
         PageHelper.startPage(pageNo, pageSize);
-        List<ManageUser> manageUsers = manageUserDao.select(data);
+        List<ManageUser> manageUsers = manageUserDao.queryManageUsers(data);
         return manageUsers;
     }
 }

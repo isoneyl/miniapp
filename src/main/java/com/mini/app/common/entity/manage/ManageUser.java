@@ -8,6 +8,7 @@ import lombok.experimental.Accessors;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 import java.io.Serializable;
 import java.util.Date;
 
@@ -43,5 +44,11 @@ public class ManageUser implements Serializable {
     private Integer gender;
 
     private Date createTime;
+
+    @Transient
+    private String roleName;
+
+    @Transient
+    private Integer roleId;
 
 }

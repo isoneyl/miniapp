@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mini.app.sys.dao.ManageUserDao">
+
+
+	<select id="queryManageUsers" parameterType="com.mini.app.common.entity.manage.ManageUser" resultType="com.mini.app.common.entity.manage.ManageUser">
+
+		select
+		tmu.manage_id as manageId,
+		tmu.manage_name as manageName,
+		tmu.phone,
+		tmu.email,
+		tmu.gender,
+		tsur.role_id as roleId,
+		tsur.role_name as roleName
+			from tb_manage_user tmu
+			left join tb_sys_user_role tsur on tmu.manage_id = tsur.user_id
+			<where>
+			<if test="manageName != null">
+				and tmu.manage_name like CONCAT('%',#{manageName},'%')
+			</if>
+			<if test="roleName !=null">
+				and tsur.role_name like CONCAT('%',#{roleName},'%')
+			</if>
+			</where>
+	</select>
+</mapper>
+ 
+
