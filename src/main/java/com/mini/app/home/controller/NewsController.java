@@ -31,9 +31,19 @@ public class NewsController {
     @Autowired
     private NewsService newsService;
 
+    @PostMapping(value = "/queryNews", produces = "application/json; charset=UTF-8")
+    @ResponseBody
+    public ApiResponse<List<News>> queryNews(@RequestBody ApiRequest<News> apiRequest) {
+        News data = apiRequest.getData();
+        Integer pageNo = apiRequest.getPageNo();
+        Integer pageSize = apiRequest.getPageSize();
+        List<News> newsList = newsService.queryNews(data, pageNo, pageSize);
+        return ApiResponse.createApiResponse(newsList, Result.SUCCESS);
+    }
+
     @PostMapping(value = "/addNews", produces = "application/json; charset=UTF-8")
     @ValidateArguments(validateArguments = {
-            @ValidateArgument(fieldName = "bulletinTitle"),
+            @ValidateArgument(fieldName = "newsTitle"),
             @ValidateArgument(fieldName = "publishOrg"),
             @ValidateArgument(fieldName = "manageId"),
             @ValidateArgument(fieldName = "manageName"),

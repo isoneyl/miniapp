@@ -16,6 +16,4 @@ public interface NewsService {
     int updateNews(News data);
 
     int delNews(Integer data);
-
-    List<News> queryNews(Integer pageNo, Integer pageSize, News data);
 }
