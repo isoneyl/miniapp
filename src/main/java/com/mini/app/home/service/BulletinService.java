@@ -2,6 +2,8 @@ package com.mini.app.home.service;
 
 import com.mini.app.common.entity.home.Bulletin;
 
+import java.util.List;
+
 /**
  * @author liyunlng
  * @ClassName: BulletinService
@@ -14,4 +16,6 @@ public interface BulletinService {
     int updateBulletin(Bulletin data);
 
     int delBulletin(Integer data);
+
+    List<Bulletin> queryBulletin(Integer pageNo, Integer pageSize, Bulletin data);
 }

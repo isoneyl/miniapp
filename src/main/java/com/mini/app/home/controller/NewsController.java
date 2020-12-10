@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.util.Date;
+import java.util.List;
 
 /**
  * @author liyunlng
@@ -66,5 +67,15 @@ public class NewsController {
         Integer data = apiRequest.getData();
         newsService.delNews(data);
         return ApiResponse.createApiResponse(null, Result.SUCCESS);
+    }
+
+    @PostMapping(value = "/queryNews", produces = "application/json; charset=UTF-8")
+    @ResponseBody
+    public ApiResponse<List<News>> queryNews(@RequestBody ApiRequest<News> apiRequest) {
+        apiRequest.getPageNo();
+
+        News data = apiRequest.getData();
+        List<News> datas = newsService.queryNews(apiRequest.getPageNo(), apiRequest.getPageSize(), data);
+        return ApiResponse.createApiResponse(datas, Result.SUCCESS);
     }
 }

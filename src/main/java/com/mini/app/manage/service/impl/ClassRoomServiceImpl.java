@@ -43,7 +43,7 @@ public class ClassRoomServiceImpl implements ClassRoomService {
     @Override
     public List<ClassRoom> queryUsers(Integer pageNo, Integer pageSize, ClassRoom data) {
         PageHelper.startPage(pageNo, pageSize);
-        List<ClassRoom> classRooms = classRoomDao.select(data);
+        List<ClassRoom> classRooms = classRoomDao.selectAll();
         return classRooms;
     }
 }

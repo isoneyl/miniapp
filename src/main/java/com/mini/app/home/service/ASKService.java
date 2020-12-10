@@ -2,6 +2,8 @@ package com.mini.app.home.service;
 
 import com.mini.app.common.entity.home.Ask;
 
+import java.util.List;
+
 /**
  * @author liyunlng
  * @ClassName: ASKService
@@ -14,4 +16,6 @@ public interface ASKService {
     int updateAsk(Ask data);
 
     int delAsk(Integer data);
+
+    List<Ask> queryAsks(Integer pageNo, Integer pageSize, Ask data);
 }

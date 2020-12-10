@@ -21,6 +21,37 @@ spring:
       max-request-size: 10MB
       max-file-size: 10MB
 
+  elasticsearch:
+    bboss:
+      elasticUser: elastic
+      elasticPassword: Li19970712
+      elasticsearch:
+        rest:
+          hostNames: https://es-pje3h45r.public.tencentelasticsearch.com:9200
+        dateFormat: yyyy.MM.dd
+        timeZone: Asia/Shanghai
+        ttl: 2d
+        showTemplate: false
+        discoverHost: false
+      dslfile:
+        refreshInterval: -1
+      http:
+        timeoutConnection: 5000
+        timeoutSocket: 5000
+        connectionRequestTimeout: 5000
+        retryTime: 1
+        maxLineLength: -1
+        maxHeaderCount: 200
+        maxTotal: 400
+        defaultMaxPerRoute: 200
+        soReuseAddress: false
+        soKeepAlive: false
+        timeToLive: 3600000
+        keepAlive: 3600000
+        keystore:
+        keyPassword:
+        hostnameVerifier:
+
 
 mybatis:
   mapper-locations: classpath:mapper/*.xml

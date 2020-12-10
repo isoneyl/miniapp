@@ -1,11 +1,14 @@
 package com.mini.app.home.service.impl;
 
+import com.github.pagehelper.PageHelper;
 import com.mini.app.common.entity.home.Ask;
 import com.mini.app.home.dao.AskDao;
 import com.mini.app.home.service.ASKService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.List;
 
 /**
  * @author liyunlng
@@ -35,5 +38,12 @@ public class ASKServiceImpl implements ASKService {
     @Transactional
     public int delAsk(Integer data) {
         return askDao.deleteByPrimaryKey(data);
+    }
+
+    @Override
+    public List<Ask> queryAsks(Integer pageNo, Integer pageSize, Ask data) {
+        PageHelper.startPage(pageNo, pageSize);
+        List<Ask> list = askDao.selectAll();
+        return list;
     }
 }

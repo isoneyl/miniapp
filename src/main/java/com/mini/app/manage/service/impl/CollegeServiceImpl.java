@@ -45,7 +45,7 @@ public class CollegeServiceImpl implements CollegeService {
     @Override
     public List<College> queryUsers(Integer pageNo, Integer pageSize, College data) {
         PageHelper.startPage(pageNo, pageSize);
-        List<College> colleges = collegeDao.select(data);
+        List<College> colleges = collegeDao.selectAll();
         return colleges;
     }
 }

@@ -1,11 +1,14 @@
 package com.mini.app.home.service.impl;
 
+import com.github.pagehelper.PageHelper;
 import com.mini.app.common.entity.home.News;
 import com.mini.app.home.dao.NewsDao;
 import com.mini.app.home.service.NewsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.List;
 
 /**
  * @author liyunlng
@@ -35,5 +38,12 @@ public class NewsServiceImpl implements NewsService {
     @Transactional
     public int delNews(Integer data) {
         return newsDao.deleteByPrimaryKey(data);
+    }
+
+    @Override
+    public List<News> queryNews(Integer pageNo, Integer pageSize, News data) {
+        PageHelper.startPage(pageNo, pageSize);
+        List<News> select = newsDao.selectAll();
+        return select;
     }
 }

@@ -2,6 +2,8 @@ package com.mini.app.home.service;
 
 import com.mini.app.common.entity.home.News;
 
+import java.util.List;
+
 /**
  * @author liyunlng
  * @ClassName: NewsService
@@ -14,4 +16,6 @@ public interface NewsService {
     int updateNews(News data);
 
     int delNews(Integer data);
+
+    List<News> queryNews(Integer pageNo, Integer pageSize, News data);
 }

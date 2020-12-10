@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.util.Date;
+import java.util.List;
 
 /**
  * @author liyunlng
@@ -43,6 +44,17 @@ public class ASKController {
         Ask data = apiRequest.getData();
         data.setCreateTime(new Date());
         askService.addAsk(data);
+        return ApiResponse.createApiResponse(null, Result.SUCCESS);
+    }
+
+    @PostMapping(value = "/queryAsks", produces = "application/json; charset=UTF-8")
+    @ResponseBody
+    public ApiResponse<List<Ask>> queryAsks(@RequestBody ApiRequest<Ask> apiRequest) {
+        Integer pageSize = apiRequest.getPageSize();
+        Integer pageNo = apiRequest.getPageNo();
+
+        Ask data = apiRequest.getData();
+        List<Ask> list = askService.queryAsks(pageNo, pageSize, data);
         return ApiResponse.createApiResponse(null, Result.SUCCESS);
     }
 

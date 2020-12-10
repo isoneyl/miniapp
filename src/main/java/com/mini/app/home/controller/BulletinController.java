@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.util.Date;
+import java.util.List;
 
 /**
  * @author liyunlng
@@ -66,6 +67,18 @@ public class BulletinController {
         Integer data = apiRequest.getData();
         bulletinService.delBulletin(data);
         return ApiResponse.createApiResponse(null, Result.SUCCESS);
+    }
+
+    @PostMapping(value = "/queryBulletins", produces = "application/json; charset=UTF-8")
+    @ResponseBody
+    public ApiResponse<List<Bulletin>> queryBulletins(@RequestBody ApiRequest<Bulletin> apiRequest) {
+
+        Integer pageSize = apiRequest.getPageSize();
+        Integer pageNo = apiRequest.getPageNo();
+
+        Bulletin data = apiRequest.getData();
+        List<Bulletin> bulletins = bulletinService.queryBulletin(pageNo, pageSize, data);
+        return ApiResponse.createApiResponse(bulletins, Result.SUCCESS);
     }
 
 }
